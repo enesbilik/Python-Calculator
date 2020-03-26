@@ -9,30 +9,65 @@ value.set("")
 
 px=5
 py=12
-state=0 # not work
+
+
+def checkState():
+    global butonMult,butonSqrt,butonPow,butonDot
+    if len(entry.get())==0:
+        butonPow["state"]=tk.DISABLED
+        butonMult["state"]=tk.DISABLED
+        butonSqrt["state"]=tk.DISABLED
+        butonDot["state"]=tk.DISABLED
+        butonDiv["state"]=tk.DISABLED
+    
+    elif entry.get()=="-":
+        butonPow["state"]=tk.DISABLED
+        butonMult["state"]=tk.DISABLED
+        butonSqrt["state"]=tk.DISABLED
+        butonDot["state"]=tk.DISABLED
+        butonDiv["state"]=tk.DISABLED
+
+        
+
+    else:
+        butonPow["state"]=tk.NORMAL
+        butonMult["state"]=tk.NORMAL
+        butonSqrt["state"]=tk.NORMAL
+        butonDot["state"]=tk.NORMAL
+        butonDiv["state"]=tk.NORMAL
+        
+def pow():
+    press_num("^")
+
 
 def sqrt():
     valuen=entry.get()
     valuen=eval(valuen)
-    value.set(valuen**0.5)
+    value.set(round(valuen**0.5,4))
 
 
 def clearLast():
     global value
     value.set(entry.get()[:-1])
+    checkState()
 
 def clearAll():
     global value
     value.set("")
+    checkState()
 
 def press_num(tx):
     leng=len(entry.get())
-    entry.insert(leng,tx) 
+    entry.insert(leng,tx)
+    checkState()
 
 def calculate():
-    islem=str(entry.get())
+    islem=str(entry.get()).replace("^","**")
     sonuc=eval(islem)
     value.set(sonuc)
+
+
+
 
 root.title("Calculator")
 root.geometry("{}x{}+900+200".format(width,height))
@@ -48,7 +83,7 @@ butonC.grid(row=1,column=0,ipady=py)
 butonSqrt=tk.Button(text="√",font="Verdana 10",width=px,command=lambda:sqrt())
 butonSqrt.grid(row=1,column=1,ipady=py)
 
-butonPow=tk.Button(text="X^Y",font="Verdana 10",width=px)
+butonPow=tk.Button(text="X^Y",font="Verdana 10",width=px,command=lambda:pow())
 butonPow.grid(row=1,column=2,ipady=py)
 
 butonPerc=tk.Button(text="<-",font="Verdana 10",width=px,command=lambda:clearLast())
@@ -92,7 +127,7 @@ butonEqual=tk.Button(text="=",font="Verdana 10",width=px,command= lambda: calcul
 butonEqual.grid(row=5,column=2,ipady=py)
 
 
-
+checkState()
 
 
 
