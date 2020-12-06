@@ -22,7 +22,7 @@ Check the sample steps to run it on your computer.
     $ python main.py
     ```
    
-### Screen Shoot
+## Screen Shoot
 <img src="ssc1.png" height="300em" title="Tkinter">
 
 ## Supported Operations
